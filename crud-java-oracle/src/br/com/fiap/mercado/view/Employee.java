@@ -41,7 +41,7 @@ public class Employee {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public void setWage(float wage) {
+	public void setWage(double wage) {
 		this.wage = wage;
 	}
 }
