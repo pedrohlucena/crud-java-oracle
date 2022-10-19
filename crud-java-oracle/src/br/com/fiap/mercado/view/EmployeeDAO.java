@@ -10,13 +10,17 @@ import java.util.List;
 
 public class EmployeeDAO {
 	private Connection connection;
+	
 	private PreparedStatement stmt;
 
 	public void save(Employee employee) {
+		this.connection = null;
 		this.stmt = null;
 
 		try {
-			this.connection = EnterpriseDBConnection.connect();
+			connection = EnterpriseDBConnection.connect();
+			
+			connection.setAutoCommit(false);
 
 			String sql = "INSERT INTO T_COLABORADOR (cd_colaborador, nm_colaborador, ds_email, vl_salario, dt_contratacao)"
 					+ "VALUES (SEQ_COLABORADOR.NEXTVAL, ?, ?, ?, ?)";
@@ -31,16 +35,16 @@ public class EmployeeDAO {
 			stmt.setDate(4, data);
 
 			stmt.executeUpdate();
+			
+			connection.commit();
 		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
 			try {
-				stmt.close();
-				connection.close();
-			} catch (SQLException e) {
+				connection.rollback();
 				e.printStackTrace();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
 			}
-		}
+		} 
 	}
 
 	public List<Employee> list() {
@@ -82,12 +86,21 @@ public class EmployeeDAO {
 		this.stmt = null;
 		try {
 			this.connection = EnterpriseDBConnection.connect();
+			
+			connection.setAutoCommit(false);
 
 			stmt = connection.prepareStatement("DELETE FROM T_COLABORADOR WHERE cd_colaborador = ?");
 			stmt.setInt(1, code);
 			stmt.executeUpdate();
+			
+			connection.commit();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			try {
+				connection.rollback();
+				e.printStackTrace();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		} finally {
 			try {
 				stmt.close();
@@ -139,6 +152,8 @@ public class EmployeeDAO {
 
 		try {
 			this.connection = EnterpriseDBConnection.connect();
+			
+			connection.setAutoCommit(false);
 
 			String sql = "UPDATE T_COLABORADOR SET nm_colaborador= ?, ds_email = ?, vl_salario = ?, dt_contratacao = ? WHERE cd_colaborador = ?";
 
@@ -153,8 +168,15 @@ public class EmployeeDAO {
 			stmt.setInt(5, employee.getCode());
 
 			stmt.executeUpdate();
+			
+			connection.commit();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			try {
+				connection.rollback();
+				e.printStackTrace();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		} finally {
 			try {
 				stmt.close();
