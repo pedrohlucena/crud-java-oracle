@@ -1,8 +1,9 @@
 package br.com.fiap.mercado.view;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
-public class Employee {
+public class Employee implements Serializable {
 	private int code;
 	private String name;
 	private String email;
