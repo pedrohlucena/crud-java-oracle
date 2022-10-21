@@ -44,7 +44,14 @@ public class EmployeeDAO {
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-		} 
+		} finally {
+			try {
+				stmt.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public List<Employee> list() {
