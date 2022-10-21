@@ -1,4 +1,4 @@
-package br.com.fiap.mercado.view;
+package br.com.fiap.mercado.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,11 +8,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class EmployeeDAO {
+import br.com.fiap.mercado.entity.Employee;
+import br.com.fiap.mercado.jdbc.EnterpriseDBConnection;
+
+public class EmployeeDAOImpl implements EmployeeDAO {
 	private Connection connection;
 	
 	private PreparedStatement stmt;
-
+	
 	public void save(Employee employee) {
 		this.connection = null;
 		this.stmt = null;
@@ -117,7 +120,7 @@ public class EmployeeDAO {
 			}
 		}
 	}
-
+	
 	public Employee fetchById(int code) {
 		this.stmt = null;
 		Employee employee = null;
