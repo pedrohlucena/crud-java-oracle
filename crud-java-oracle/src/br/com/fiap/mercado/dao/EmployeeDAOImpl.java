@@ -22,7 +22,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		this.stmt = null;
 
 		try {
-			connection = EnterpriseDBConnection.connect();
+			this.connection = EnterpriseDBConnection.getInstance().getConnection();
 			
 			connection.setAutoCommit(false);
 
@@ -64,7 +64,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		List<Employee> employeeList = new ArrayList<Employee>();
 		ResultSet result = null;
 		try {
-			this.connection = EnterpriseDBConnection.connect();
+			this.connection = EnterpriseDBConnection.getInstance().getConnection();
 			stmt = connection.prepareStatement("SELECT * FROM T_COLABORADOR");
 			result = stmt.executeQuery();
 
@@ -98,7 +98,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	public void remove(int code) {
 		this.stmt = null;
 		try {
-			this.connection = EnterpriseDBConnection.connect();
+			this.connection = EnterpriseDBConnection.getInstance().getConnection();
 			
 			connection.setAutoCommit(false);
 
@@ -131,7 +131,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		ResultSet result = null;
 
 		try {
-			this.connection = EnterpriseDBConnection.connect();
+			this.connection = EnterpriseDBConnection.getInstance().getConnection();
 
 			stmt = connection.prepareStatement("SELECT * FROM T_COLABORADOR WHERE cd_colaborador = ?");
 			stmt.setInt(1, code);
@@ -166,7 +166,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		this.stmt = null;
 
 		try {
-			this.connection = EnterpriseDBConnection.connect();
+			this.connection = EnterpriseDBConnection.getInstance().getConnection();
 			
 			connection.setAutoCommit(false);
 

@@ -5,7 +5,18 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class EnterpriseDBConnection {
-	public static Connection connect() {
+	static EnterpriseDBConnection instance;
+	
+	private EnterpriseDBConnection(){};
+	
+	public static EnterpriseDBConnection getInstance() {
+		if(instance == null) {
+			instance = new EnterpriseDBConnection();
+		}
+		return instance;
+	}
+	
+	public static Connection getConnection() {
 		Connection connection = null;
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
