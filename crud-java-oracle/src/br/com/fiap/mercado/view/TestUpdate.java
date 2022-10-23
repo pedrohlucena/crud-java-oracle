@@ -1,11 +1,12 @@
 package br.com.fiap.mercado.view;
 
+import br.com.fiap.mercado.dao.EmployeeDAO;
 import br.com.fiap.mercado.dao.EmployeeDAOImpl;
 import br.com.fiap.mercado.entity.Employee;
 
 public class TestUpdate {
 	public static void main(String[] args) {
-		EmployeeDAOImpl employeeDAO = new EmployeeDAOImpl();
+		EmployeeDAO employeeDAO = new EmployeeDAOImpl();
 		
 		Employee employeeToBeUpdated = employeeDAO.fetchById(3);
 		System.out.println(employeeToBeUpdated.getName());
