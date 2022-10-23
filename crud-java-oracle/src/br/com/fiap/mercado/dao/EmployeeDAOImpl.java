@@ -16,6 +16,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	
 	private PreparedStatement stmt;
 	
+	@Override
 	public void save(Employee employee) {
 		this.connection = null;
 		this.stmt = null;
@@ -57,6 +58,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		}
 	}
 
+	@Override
 	public List<Employee> list() {
 		this.stmt = null;
 		List<Employee> employeeList = new ArrayList<Employee>();
@@ -92,6 +94,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		return employeeList;
 	}
 
+	@Override
 	public void remove(int code) {
 		this.stmt = null;
 		try {
@@ -121,6 +124,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		}
 	}
 	
+	@Override
 	public Employee fetchById(int code) {
 		this.stmt = null;
 		Employee employee = null;
@@ -157,6 +161,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		return employee;
 	}
 
+	@Override
 	public void update(Employee employee) {
 		this.stmt = null;
 
